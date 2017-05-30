@@ -35,11 +35,13 @@ namespace MetaTesina.Models
         public int AuthorID { get; set; }
 
         [Required]
-        [Display(Name="Data Articolo")]
+        [Display(Name="Data Creazione Articolo")]
+        [DataTypeAttribute(DataType.Date)]
         public DateTime ArticleCreateDate { get; set; }
 
         [Required]
-        [Display(Name="Data Articolo")]
+        [Display(Name="Data Modifica Articolo")]
+        [DataTypeAttribute(DataType.Date)]
         public DateTime ArticleModifyDate { get; set; }
 
         [Required]
@@ -50,12 +52,14 @@ namespace MetaTesina.Models
 
         [Required]
         [Display(Name="Descrizione Articolo")]
+        [DataTypeAttribute(DataType.MultilineText)]
         [MinLength(2)]
         [StringLength(250)]
         public string ArticleDescription { get; set; }
         
         [Required]
         [Display(Name="Contenuto Articolo")]
+        [DataTypeAttribute(DataType.MultilineText)]
         [MinLength(10)]
         [StringLength(10000)]
         public string ArticleContent { get; set; }

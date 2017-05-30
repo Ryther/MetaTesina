@@ -50,9 +50,9 @@ namespace MetaTesina.Controllers
         // GET: Article/Create
         public IActionResult Create()
         {
-            ViewData["ArticleLinkImgID"] = new SelectList(_context.Set<Asset>(), "AssetID", "AssetID");
-            ViewData["ArticleMainImgID"] = new SelectList(_context.Set<Asset>(), "AssetID", "AssetID");
-            ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "CategoryID", "CategoryDescription");
+            ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription");
+            ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription");
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryDescription");
             return View();
         }
 
@@ -69,9 +69,9 @@ namespace MetaTesina.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["ArticleLinkImgID"] = new SelectList(_context.Set<Asset>(), "AssetID", "AssetID", article.ArticleLinkImgID);
-            ViewData["ArticleMainImgID"] = new SelectList(_context.Set<Asset>(), "AssetID", "AssetID", article.ArticleMainImgID);
-            ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "CategoryID", "CategoryDescription", article.CategoryID);
+            ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription", article.ArticleLinkImgID);
+            ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription", article.ArticleMainImgID);
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryDescription", article.CategoryID);
             return View(article);
         }
 
@@ -88,9 +88,9 @@ namespace MetaTesina.Controllers
             {
                 return NotFound();
             }
-            ViewData["ArticleLinkImgID"] = new SelectList(_context.Set<Asset>(), "AssetID", "AssetID", article.ArticleLinkImgID);
-            ViewData["ArticleMainImgID"] = new SelectList(_context.Set<Asset>(), "AssetID", "AssetID", article.ArticleMainImgID);
-            ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "CategoryID", "CategoryDescription", article.CategoryID);
+            ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription", article.ArticleLinkImgID);
+            ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription", article.ArticleMainImgID);
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryDescription", article.CategoryID);
             return View(article);
         }
 
@@ -126,9 +126,9 @@ namespace MetaTesina.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["ArticleLinkImgID"] = new SelectList(_context.Set<Asset>(), "AssetID", "AssetID", article.ArticleLinkImgID);
-            ViewData["ArticleMainImgID"] = new SelectList(_context.Set<Asset>(), "AssetID", "AssetID", article.ArticleMainImgID);
-            ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "CategoryID", "CategoryDescription", article.CategoryID);
+            ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription", article.ArticleLinkImgID);
+            ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription", article.ArticleMainImgID);
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryDescription", article.CategoryID);
             return View(article);
         }
 

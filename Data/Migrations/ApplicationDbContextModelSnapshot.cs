@@ -65,6 +65,88 @@ namespace MetaTesina.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("MetaTesina.Models.Article", b =>
+                {
+                    b.Property<int>("ArticleID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ArticleContent")
+                        .IsRequired()
+                        .HasMaxLength(10000);
+
+                    b.Property<DateTime>("ArticleCreateDate");
+
+                    b.Property<string>("ArticleDescription")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<int>("ArticleLinkImgID");
+
+                    b.Property<int>("ArticleMainImgID");
+
+                    b.Property<DateTime>("ArticleModifyDate");
+
+                    b.Property<string>("ArticleTitle")
+                        .IsRequired()
+                        .HasMaxLength(40);
+
+                    b.Property<int>("AuthorID");
+
+                    b.Property<int>("CategoryID");
+
+                    b.HasKey("ArticleID");
+
+                    b.HasIndex("ArticleLinkImgID");
+
+                    b.HasIndex("ArticleMainImgID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.ToTable("Article");
+                });
+
+            modelBuilder.Entity("MetaTesina.Models.Asset", b =>
+                {
+                    b.Property<int>("AssetID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AssetDescription")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<string>("AssetName")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("AssetPath")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<int>("AssetTypeID");
+
+                    b.HasKey("AssetID");
+
+                    b.ToTable("Asset");
+                });
+
+            modelBuilder.Entity("MetaTesina.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CategoryDescription")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -170,6 +252,24 @@ namespace MetaTesina.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("MetaTesina.Models.Article", b =>
+                {
+                    b.HasOne("MetaTesina.Models.Asset", "ArticleLinkImg")
+                        .WithMany()
+                        .HasForeignKey("ArticleLinkImgID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MetaTesina.Models.Asset", "ArticleMainImg")
+                        .WithMany()
+                        .HasForeignKey("ArticleMainImgID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MetaTesina.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
