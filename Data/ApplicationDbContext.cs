@@ -24,5 +24,7 @@ namespace MetaTesina.Data
         }
 
         public DbSet<MetaTesina.Models.Article> Article { get; set; }
+
+        public DbSet<MetaTesina.Models.Category> Category { get; set; }
     }
 }
