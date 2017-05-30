@@ -1,0 +1,83 @@
+@model IEnumerable<MetaTesina.Models.Article>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AuthorID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArticleCreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArticleModifyDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArticleTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArticleDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArticleContent)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArticleLinkImg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArticleMainImg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleCreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleModifyDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleLinkImg.AssetID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleMainImg.AssetID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ArticleID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ArticleID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ArticleID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

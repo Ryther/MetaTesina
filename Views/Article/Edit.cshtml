@@ -1,0 +1,89 @@
+@model MetaTesina.Models.Article
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Article</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ArticleID" />
+        <div class="form-group">
+            <label asp-for="CategoryID" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID"></select>
+                <span asp-validation-for="CategoryID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ArticleLinkImgID" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="ArticleLinkImgID" class="form-control" asp-items="ViewBag.ArticleLinkImgID"></select>
+                <span asp-validation-for="ArticleLinkImgID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ArticleMainImgID" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="ArticleMainImgID" class="form-control" asp-items="ViewBag.ArticleMainImgID"></select>
+                <span asp-validation-for="ArticleMainImgID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AuthorID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AuthorID" class="form-control" />
+                <span asp-validation-for="AuthorID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ArticleCreateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ArticleCreateDate" class="form-control" />
+                <span asp-validation-for="ArticleCreateDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ArticleModifyDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ArticleModifyDate" class="form-control" />
+                <span asp-validation-for="ArticleModifyDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ArticleTitle" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ArticleTitle" class="form-control" />
+                <span asp-validation-for="ArticleTitle" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ArticleDescription" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ArticleDescription" class="form-control" />
+                <span asp-validation-for="ArticleDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ArticleContent" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ArticleContent" class="form-control" />
+                <span asp-validation-for="ArticleContent" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
