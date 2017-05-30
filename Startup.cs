@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using MetaTesina.Data;
 using MetaTesina.Models;
 using MetaTesina.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace MetaTesina
 {
@@ -47,7 +49,13 @@ namespace MetaTesina
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                            .RequireAuthenticatedUser()
+                                            .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -74,9 +82,9 @@ namespace MetaTesina
             app.UseStaticFiles();
 
             app.UseIdentity();
-
+            
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
