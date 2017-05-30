@@ -1,0 +1,10 @@
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/bin/Debug/netcoreapp1.1/MetaTesina.db
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/bin/Debug/netcoreapp1.1/MetaTesina.deps.json
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/bin/Debug/netcoreapp1.1/MetaTesina.runtimeconfig.json
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/bin/Debug/netcoreapp1.1/MetaTesina.runtimeconfig.dev.json
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/bin/Debug/netcoreapp1.1/MetaTesina.dll
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/bin/Debug/netcoreapp1.1/MetaTesina.pdb
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/obj/Debug/netcoreapp1.1/UserSecretsAssemblyInfo.cs
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/obj/Debug/netcoreapp1.1/MetaTesina.AssemblyInfo.cs
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/obj/Debug/netcoreapp1.1/MetaTesina.dll
+/home/edoardozanoni/Scrivania/Projects/MetaTesina/obj/Debug/netcoreapp1.1/MetaTesina.pdb
