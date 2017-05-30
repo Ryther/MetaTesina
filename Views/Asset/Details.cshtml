@@ -1,0 +1,42 @@
+@model MetaTesina.Models.Asset
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Asset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetTypeID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetTypeID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetPath)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetPath)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AssetID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

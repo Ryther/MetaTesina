@@ -1,0 +1,47 @@
+@model MetaTesina.Models.Asset
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Asset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="AssetID" />
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetTypeID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetTypeID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetPath)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetPath)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>
