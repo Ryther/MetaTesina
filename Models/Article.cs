@@ -5,7 +5,7 @@ namespace MetaTesina.Models
 {
     public class Article
     {
-        [Required]
+        
         [Display(Name="Articolo")]
         public int ArticleID { get; set; }
 
@@ -32,7 +32,8 @@ namespace MetaTesina.Models
 
         [Required]
         [Display(Name="Autore Articolo")]
-        public int AuthorID { get; set; }
+        public int ApplicationUserID { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         [Required]
         [Display(Name="Data Creazione Articolo")]
@@ -47,21 +48,21 @@ namespace MetaTesina.Models
         [Required]
         [Display(Name="Titolo Articolo")]
         [MinLength(2)]
-        [StringLength(40)]
+        [MaxLength(40)]
         public string ArticleTitle { get; set; }
 
         [Required]
         [Display(Name="Descrizione Articolo")]
         [DataTypeAttribute(DataType.MultilineText)]
         [MinLength(2)]
-        [StringLength(250)]
+        [MaxLength(250)]
         public string ArticleDescription { get; set; }
         
         [Required]
         [Display(Name="Contenuto Articolo")]
         [DataTypeAttribute(DataType.MultilineText)]
         [MinLength(10)]
-        [StringLength(10000)]
+        [MaxLength(10000)]
         public string ArticleContent { get; set; }
     }
 }
