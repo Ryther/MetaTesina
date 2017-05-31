@@ -51,10 +51,10 @@ namespace MetaTesina.Controllers
         // GET: Article/Create
         public IActionResult Create()
         {
-            ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription");
-            ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription");
-            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryDescription");
+            ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "ApplicationUserNickname");
+            ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName");
+            ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName");
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryName");
             return View();
         }
 
@@ -71,10 +71,10 @@ namespace MetaTesina.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id", article.ApplicationUserID);
-            ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription", article.ArticleLinkImgID);
-            ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetDescription", article.ArticleMainImgID);
-            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryDescription", article.CategoryID);
+            ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "ApplicationUserNickname", article.ApplicationUserID);
+            ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName", article.ArticleLinkImgID);
+            ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName", article.ArticleMainImgID);
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryName", article.CategoryID);
             return View(article);
         }
 

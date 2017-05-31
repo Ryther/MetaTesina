@@ -112,7 +112,12 @@ namespace MetaTesina.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { 
+                    UserName = model.Email, 
+                    Email = model.Email,
+                    ApplicationUserFirstName = model.FirstName,
+                    ApplicationUserLastName = model.LastName,
+                    ApplicationUserNickname = model.Nickname };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

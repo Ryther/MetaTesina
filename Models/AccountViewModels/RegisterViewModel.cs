@@ -23,5 +23,20 @@ namespace MetaTesina.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Nome")]
+        [MaxLength(20)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Cognome")]
+        [MaxLength(20)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Nickname")]
+        [MaxLength(20)]
+        public string Nickname { get; set; }
     }
 }
