@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MetaTesina.Data;
 using MetaTesina.Models;
+using MetaTesina.Helpers;
+using Microsoft.AspNetCore.Identity;
 
 namespace MetaTesina.Controllers
 {
     public class ArticleController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ArticleController(ApplicationDbContext context)
+        public ArticleController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            _context = context;    
+            _context = context;
+            _userManager = userManager;
         }
 
         // GET: Article
@@ -51,7 +55,11 @@ namespace MetaTesina.Controllers
         // GET: Article/Create
         public IActionResult Create()
         {
-            ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "ApplicationUserNickname");
+            var userHelper = new UserHelper(_userManager, HttpContext);
+            string userId = userHelper.GetUserId().Result;
+            string userFirstName = userHelper.GetUserFirstNameAsync().Result;
+            ViewData["ApplicationUserId"] = userId;
+            ViewBag["ApplicationUserName"] = userFirstName;
             ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName");
             ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName");
             ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryName");
