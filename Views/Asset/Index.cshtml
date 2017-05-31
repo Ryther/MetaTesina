@@ -13,9 +13,6 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.AssetTypeID)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.AssetName)
                 </th>
                 <th>
@@ -24,15 +21,15 @@
                 <th>
                     @Html.DisplayNameFor(model => model.AssetPath)
                 </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetType)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AssetTypeID)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AssetName)
             </td>
@@ -41,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AssetPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssetType.AssetTypeDescription)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.AssetID">Edit</a> |

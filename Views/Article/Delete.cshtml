@@ -13,12 +13,6 @@
     <dl class="dl-horizontal">
         <input type="hidden" asp-for="ArticleID" />
         <dt>
-            @Html.DisplayNameFor(model => model.AuthorID)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorID)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.ArticleCreateDate)
         </dt>
         <dd>
@@ -47,6 +41,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.ArticleContent)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ArticleLinkImg)

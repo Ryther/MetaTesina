@@ -11,12 +11,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.AssetTypeID)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AssetTypeID)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.AssetName)
         </dt>
         <dd>
@@ -33,6 +27,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.AssetPath)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AssetType.AssetTypeDescription)
         </dd>
     </dl>
 </div>

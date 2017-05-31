@@ -10,23 +10,22 @@ using MetaTesina.Models;
 
 namespace MetaTesina.Controllers
 {
-    public class AssetController : Controller
+    public class AssetTypeController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AssetController(ApplicationDbContext context)
+        public AssetTypeController(ApplicationDbContext context)
         {
             _context = context;    
         }
 
-        // GET: Asset
+        // GET: AssetType
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Asset.Include(a => a.AssetType);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.AssetType.ToListAsync());
         }
 
-        // GET: Asset/Details/5
+        // GET: AssetType/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +33,39 @@ namespace MetaTesina.Controllers
                 return NotFound();
             }
 
-            var asset = await _context.Asset
-                .Include(a => a.AssetType)
-                .SingleOrDefaultAsync(m => m.AssetID == id);
-            if (asset == null)
+            var assetType = await _context.AssetType
+                .SingleOrDefaultAsync(m => m.AssetTypeID == id);
+            if (assetType == null)
             {
                 return NotFound();
             }
 
-            return View(asset);
+            return View(assetType);
         }
 
-        // GET: Asset/Create
+        // GET: AssetType/Create
         public IActionResult Create()
         {
-            ViewData["AssetTypeID"] = new SelectList(_context.Set<AssetType>(), "AssetTypeID", "AssetTypeDescription");
             return View();
         }
 
-        // POST: Asset/Create
+        // POST: AssetType/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AssetID,AssetTypeID,AssetName,AssetDescription,AssetPath")] Asset asset)
+        public async Task<IActionResult> Create([Bind("AssetTypeID,AssetTypeName,AssetTypeDescription")] AssetType assetType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(asset);
+                _context.Add(assetType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["AssetTypeID"] = new SelectList(_context.Set<AssetType>(), "AssetTypeID", "AssetTypeDescription", asset.AssetTypeID);
-            return View(asset);
+            return View(assetType);
         }
 
-        // GET: Asset/Edit/5
+        // GET: AssetType/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +73,22 @@ namespace MetaTesina.Controllers
                 return NotFound();
             }
 
-            var asset = await _context.Asset.SingleOrDefaultAsync(m => m.AssetID == id);
-            if (asset == null)
+            var assetType = await _context.AssetType.SingleOrDefaultAsync(m => m.AssetTypeID == id);
+            if (assetType == null)
             {
                 return NotFound();
             }
-            ViewData["AssetTypeID"] = new SelectList(_context.Set<AssetType>(), "AssetTypeID", "AssetTypeDescription", asset.AssetTypeID);
-            return View(asset);
+            return View(assetType);
         }
 
-        // POST: Asset/Edit/5
+        // POST: AssetType/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AssetID,AssetTypeID,AssetName,AssetDescription,AssetPath")] Asset asset)
+        public async Task<IActionResult> Edit(int id, [Bind("AssetTypeID,AssetTypeName,AssetTypeDescription")] AssetType assetType)
         {
-            if (id != asset.AssetID)
+            if (id != assetType.AssetTypeID)
             {
                 return NotFound();
             }
@@ -102,12 +97,12 @@ namespace MetaTesina.Controllers
             {
                 try
                 {
-                    _context.Update(asset);
+                    _context.Update(assetType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AssetExists(asset.AssetID))
+                    if (!AssetTypeExists(assetType.AssetTypeID))
                     {
                         return NotFound();
                     }
@@ -118,11 +113,10 @@ namespace MetaTesina.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["AssetTypeID"] = new SelectList(_context.Set<AssetType>(), "AssetTypeID", "AssetTypeDescription", asset.AssetTypeID);
-            return View(asset);
+            return View(assetType);
         }
 
-        // GET: Asset/Delete/5
+        // GET: AssetType/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +124,30 @@ namespace MetaTesina.Controllers
                 return NotFound();
             }
 
-            var asset = await _context.Asset
-                .Include(a => a.AssetType)
-                .SingleOrDefaultAsync(m => m.AssetID == id);
-            if (asset == null)
+            var assetType = await _context.AssetType
+                .SingleOrDefaultAsync(m => m.AssetTypeID == id);
+            if (assetType == null)
             {
                 return NotFound();
             }
 
-            return View(asset);
+            return View(assetType);
         }
 
-        // POST: Asset/Delete/5
+        // POST: AssetType/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var asset = await _context.Asset.SingleOrDefaultAsync(m => m.AssetID == id);
-            _context.Asset.Remove(asset);
+            var assetType = await _context.AssetType.SingleOrDefaultAsync(m => m.AssetTypeID == id);
+            _context.AssetType.Remove(assetType);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool AssetExists(int id)
+        private bool AssetTypeExists(int id)
         {
-            return _context.Asset.Any(e => e.AssetID == id);
+            return _context.AssetType.Any(e => e.AssetTypeID == id);
         }
     }
 }

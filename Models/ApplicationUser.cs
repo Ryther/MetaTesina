@@ -10,7 +10,6 @@ namespace MetaTesina.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        public int ApplicationUserID { get; set; }
 
         [Required]
         [Display(Name="Nome Utente")]

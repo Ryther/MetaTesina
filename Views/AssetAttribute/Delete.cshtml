@@ -1,4 +1,4 @@
-@model MetaTesina.Models.Asset
+@model MetaTesina.Models.AssetAttribute
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,27 +8,21 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Asset</h4>
+    <h4>AssetAttribute</h4>
     <hr />
     <dl class="dl-horizontal">
-        <input type="hidden" asp-for="AssetID" />
+        <input type="hidden" asp-for="AssetAttributeID" />
         <dt>
-            @Html.DisplayNameFor(model => model.AssetName)
+            @Html.DisplayNameFor(model => model.AssetTypeName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AssetName)
+            @Html.DisplayFor(model => model.AssetTypeName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AssetDescription)
+            @Html.DisplayNameFor(model => model.AssetTypeDescription)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AssetDescription)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AssetPath)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AssetPath)
+            @Html.DisplayFor(model => model.AssetTypeDescription)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.AssetType)

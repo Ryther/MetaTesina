@@ -13,9 +13,6 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.AuthorID)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.ArticleCreateDate)
                 </th>
                 <th>
@@ -30,6 +27,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ArticleContent)
                 </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ArticleLinkImg)
             </th>
@@ -46,9 +46,6 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AuthorID)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ArticleCreateDate)
             </td>
             <td>
@@ -62,6 +59,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ArticleContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ArticleLinkImg.AssetDescription)

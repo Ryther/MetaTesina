@@ -1,4 +1,4 @@
-@model MetaTesina.Models.Asset
+@model MetaTesina.Models.AssetAttribute
 
 @{
     ViewData["Title"] = "Create";
@@ -8,7 +8,7 @@
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>Asset</h4>
+        <h4>AssetAttribute</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -18,24 +18,17 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="AssetName" class="col-md-2 control-label"></label>
+            <label asp-for="AssetTypeName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="AssetName" class="form-control" />
-                <span asp-validation-for="AssetName" class="text-danger"></span>
+                <input asp-for="AssetTypeName" class="form-control" />
+                <span asp-validation-for="AssetTypeName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="AssetDescription" class="col-md-2 control-label"></label>
+            <label asp-for="AssetTypeDescription" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="AssetDescription" class="form-control" />
-                <span asp-validation-for="AssetDescription" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="AssetPath" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="AssetPath" class="form-control" />
-                <span asp-validation-for="AssetPath" class="text-danger"></span>
+                <input asp-for="AssetTypeDescription" class="form-control" />
+                <span asp-validation-for="AssetTypeDescription" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">

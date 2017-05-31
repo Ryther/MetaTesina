@@ -28,5 +28,9 @@ namespace MetaTesina.Data
         public DbSet<MetaTesina.Models.Category> Category { get; set; }
 
         public DbSet<MetaTesina.Models.Asset> Asset { get; set; }
+
+        public DbSet<MetaTesina.Models.AssetAttribute> AssetAttribute { get; set; }
+
+        public DbSet<MetaTesina.Models.AssetType> AssetType { get; set; }
     }
 }

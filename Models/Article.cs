@@ -32,7 +32,7 @@ namespace MetaTesina.Models
 
         [Required]
         [Display(Name="Autore Articolo")]
-        public int ApplicationUserID { get; set; }
+        public string ApplicationUserID { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         [Required]

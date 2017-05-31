@@ -22,6 +22,18 @@ namespace MetaTesina.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("ApplicationUserFirstName")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("ApplicationUserLastName")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("ApplicationUserNickname")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -70,6 +82,9 @@ namespace MetaTesina.Data.Migrations
                     b.Property<int>("ArticleID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserID")
+                        .IsRequired();
+
                     b.Property<string>("ArticleContent")
                         .IsRequired()
                         .HasMaxLength(10000);
@@ -90,11 +105,11 @@ namespace MetaTesina.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(40);
 
-                    b.Property<int>("AuthorID");
-
                     b.Property<int>("CategoryID");
 
                     b.HasKey("ArticleID");
+
+                    b.HasIndex("ApplicationUserID");
 
                     b.HasIndex("ArticleLinkImgID");
 
@@ -126,7 +141,49 @@ namespace MetaTesina.Data.Migrations
 
                     b.HasKey("AssetID");
 
+                    b.HasIndex("AssetTypeID");
+
                     b.ToTable("Asset");
+                });
+
+            modelBuilder.Entity("MetaTesina.Models.AssetAttribute", b =>
+                {
+                    b.Property<int>("AssetAttributeID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AssetTypeDescription")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<int>("AssetTypeID");
+
+                    b.Property<string>("AssetTypeName")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.HasKey("AssetAttributeID");
+
+                    b.HasIndex("AssetTypeID");
+
+                    b.ToTable("AssetAttribute");
+                });
+
+            modelBuilder.Entity("MetaTesina.Models.AssetType", b =>
+                {
+                    b.Property<int>("AssetTypeID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AssetTypeDescription")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<string>("AssetTypeName")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.HasKey("AssetTypeID");
+
+                    b.ToTable("AssetType");
                 });
 
             modelBuilder.Entity("MetaTesina.Models.Category", b =>
@@ -256,6 +313,11 @@ namespace MetaTesina.Data.Migrations
 
             modelBuilder.Entity("MetaTesina.Models.Article", b =>
                 {
+                    b.HasOne("MetaTesina.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("MetaTesina.Models.Asset", "ArticleLinkImg")
                         .WithMany()
                         .HasForeignKey("ArticleLinkImgID")
@@ -269,6 +331,22 @@ namespace MetaTesina.Data.Migrations
                     b.HasOne("MetaTesina.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MetaTesina.Models.Asset", b =>
+                {
+                    b.HasOne("MetaTesina.Models.AssetType", "AssetType")
+                        .WithMany()
+                        .HasForeignKey("AssetTypeID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MetaTesina.Models.AssetAttribute", b =>
+                {
+                    b.HasOne("MetaTesina.Models.AssetType", "AssetType")
+                        .WithMany()
+                        .HasForeignKey("AssetTypeID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
