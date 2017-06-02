@@ -59,7 +59,6 @@ namespace MetaTesina.Controllers
             string userId = userHelper.GetUserId().Result;
             string userFirstName = userHelper.GetUserFirstNameAsync().Result;
             ViewData["ApplicationUserId"] = userId;
-            ViewBag["ApplicationUserName"] = userFirstName;
             ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName");
             ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName");
             ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryName");

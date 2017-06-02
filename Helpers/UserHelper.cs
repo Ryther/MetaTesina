@@ -23,7 +23,8 @@ namespace MetaTesina.Helpers
 
         public async Task<string> GetUserId()
         {
-            return _userManager.GetUserId(_context.User);
+            var user = await _userManager.GetUserAsync(_context.User);
+            return user.Id;
         }
             
         public async Task<string> GetUserFirstNameAsync()
