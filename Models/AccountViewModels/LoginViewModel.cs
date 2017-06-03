@@ -10,13 +10,14 @@ namespace MetaTesina.Models.AccountViewModels
     {
         [Required]
         [EmailAddress]
+        [Display(Name="E-Mail")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Rimani connesso?")]
         public bool RememberMe { get; set; }
     }
 }
