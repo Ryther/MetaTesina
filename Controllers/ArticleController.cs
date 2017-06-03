@@ -26,7 +26,15 @@ namespace MetaTesina.Controllers
         // GET: Article
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Article.Include(a => a.ApplicationUser).Include(a => a.ArticleLinkImg).Include(a => a.ArticleMainImg).Include(a => a.Category);
+            UserHelper userHelper = new UserHelper(_userManager, HttpContext);
+            string userId = userHelper.GetUserId().Result;
+
+            var applicationDbContext = _context.Article
+                                            .Include(a => a.ApplicationUser)
+                                            .Include(a => a.ArticleLinkImg)
+                                            .Include(a => a.ArticleMainImg)
+                                            .Include(a => a.Category)
+                                            .Where(a => a.ApplicationUserID == userId);
             return View(await applicationDbContext.ToListAsync());
         }
 
