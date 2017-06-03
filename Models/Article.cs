@@ -13,21 +13,18 @@ namespace MetaTesina.Models
         [Display(Name="Categoria Articolo")]
         public int CategoryID { get; set; }
 
-        [Required]
         public virtual Category Category { get; set; }
 
         [Required]
         [Display(Name="Immagine Link Articolo")]
         public int ArticleLinkImgID { get; set; }
 
-        [Required]
         public virtual Asset ArticleLinkImg { get; set; }
 
         [Required]
         [Display(Name="Immagine Principale Articolo")]
         public int ArticleMainImgID { get; set; }
 
-        [Required]
         public virtual Asset ArticleMainImg { get; set; }
 
         [Required]

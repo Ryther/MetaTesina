@@ -53,12 +53,17 @@ namespace MetaTesina.Controllers
         }
 
         // GET: Article/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var userHelper = new UserHelper(_userManager, HttpContext);
+            UserHelper userHelper = new UserHelper(_userManager, HttpContext);
             string userId = userHelper.GetUserId().Result;
             string userFirstName = userHelper.GetUserFirstNameAsync().Result;
-            ViewData["ApplicationUserId"] = userId;
+            
+            List<ApplicationUser> user = await _context.Users
+                            .Where(u => u.Id == userId)
+                            .ToListAsync();
+
+            ViewData["ApplicationUserID"] = new SelectList(user, "Id", "ApplicationUserFirstName");
             ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName");
             ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName");
             ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryName");
@@ -78,7 +83,16 @@ namespace MetaTesina.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "ApplicationUserNickname", article.ApplicationUserID);
+            
+            UserHelper userHelper = new UserHelper(_userManager, HttpContext);
+            string userId = userHelper.GetUserId().Result;
+            string userFirstName = userHelper.GetUserFirstNameAsync().Result;
+            
+            List<ApplicationUser> user = await _context.Users
+                            .Where(u => u.Id == userId)
+                            .ToListAsync();
+
+            ViewData["ApplicationUserID"] = new SelectList(user, "Id", "ApplicationUserFirstName", article.ApplicationUserID);
             ViewData["ArticleLinkImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName", article.ArticleLinkImgID);
             ViewData["ArticleMainImgID"] = new SelectList(_context.Asset, "AssetID", "AssetName", article.ArticleMainImgID);
             ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryName", article.CategoryID);

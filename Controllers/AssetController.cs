@@ -48,7 +48,7 @@ namespace MetaTesina.Controllers
         // GET: Asset/Create
         public IActionResult Create()
         {
-            ViewData["AssetTypeID"] = new SelectList(_context.Set<AssetType>(), "AssetTypeID", "AssetTypeDescription");
+            ViewData["AssetTypeID"] = new SelectList(_context.Set<AssetType>(), "AssetTypeID", "AssetTypeName");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace MetaTesina.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["AssetTypeID"] = new SelectList(_context.Set<AssetType>(), "AssetTypeID", "AssetTypeDescription", asset.AssetTypeID);
+            ViewData["AssetTypeID"] = new SelectList(_context.Set<AssetType>(), "AssetTypeID", "AssetTypeName", asset.AssetTypeID);
             return View(asset);
         }
 
