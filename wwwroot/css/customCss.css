@@ -1,0 +1,31 @@
+.thumbnail {
+    margin: 10px;
+}
+.thumbnail.right-caption > img {
+    float: left;
+    margin-right: 9px;
+}
+
+.thumbnail.right-caption {
+    float: left;
+}
+
+.thumbnail.right-caption > .caption {
+    padding: 8px;
+}
+
+.image {
+    display: table-cell;    
+}
+
+.caption {
+    width: 100%;
+    display: table-cell;
+    vertical-align: top;
+}
+
+@media (max-width: 768px) {
+    .image, .caption {
+      display: block; 
+    }   
+}
