@@ -113,7 +113,7 @@ namespace MetaTesina.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { 
-                    UserName = model.Email, 
+                    UserName = model.Nickname, 
                     Email = model.Email,
                     ApplicationUserFirstName = model.FirstName,
                     ApplicationUserLastName = model.LastName,
