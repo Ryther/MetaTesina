@@ -26,8 +26,7 @@ namespace MetaTesina.Controllers
         // GET: Article
         public async Task<IActionResult> Index()
         {
-            UserHelper userHelper = new UserHelper(_userManager, HttpContext);
-            string userId = userHelper.GetUserId().Result;
+            string userId = _userManager.GetUserId(HttpContext.User);
 
             var applicationDbContext = _context.Article
                                             .Include(a => a.ApplicationUser)
