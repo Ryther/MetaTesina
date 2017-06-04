@@ -1,82 +1,41 @@
-﻿@model MetaTesina.Models.HomeViewModels.IndexData
+@model IEnumerable<MetaTesina.Models.Article>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row col-md-10">
-    <div class="thumbnail rightg-caption col-xs-8 col-md-4">
-        <div class="image">
-            <img class="img-responsive" src="http://colorvisiontesting.com/images/plate%20with%205.jpg" alt="">
+@foreach (var item in Model)
+{
+    <div class="row col-md-10">
+        <div class="thumbnail rightg-caption col-xs-8 col-md-4">
+            <div class="image">
+                <img class="img-responsive" src="@item.ArticleLinkImg.AssetPath" alt="">
+            </div>
+            <div class="caption">
+                <h2>@item.ArticleTitle
+                    <br>
+                    <small>
+                        @item.Category.CategoryName
+                    </small>
+                </h2>
+                <p>Test write</p>
+                <p><a href=""></a><a href=""></a></p>
+            </div>
         </div>
-        <div class="caption">
-            <h2>Test
-                <br>
-                <small>
-                    Storia
-                </small>
-            </h2>
-            <p>Test write</p>
-            <p><a href=""></a><a href=""></a></p>
-        </div>
-    </div>
-    <div class="thumbnail rightg-caption col-xs-8 col-md-4">
-        <div class="image">
-            <img class="img-responsive" src="http://colorvisiontesting.com/images/plate%20with%205.jpg" alt="">
-        </div>
-        <div class="caption">
-            <h2>Test
-                <br>
-                <small>
-                    Storia
-                </small>
-            </h2>
-            <p>Test write</p>
-            <p><a href=""></a><a href=""></a></p>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="thumbnail rightg-caption col-xs-5 col-md-5">
-        <div class="image">
-            <img class="img-responsive" src="http://colorvisiontesting.com/images/plate%20with%205.jpg" alt="" class="span2">
-        </div>
-        <div class="caption span2">
-            <h3>Test</h3>
-            <p>Test write</p>
-            <p><a href=""></a><a href=""></a></p>
+        <div class="thumbnail rightg-caption col-xs-8 col-md-4">
+            <div class="image">
+                <img class="img-responsive" src="http://colorvisiontesting.com/images/plate%20with%205.jpg" alt="">
+            </div>
+            <div class="caption">
+                <h2>Test
+                    <br>
+                    <small>
+                        Storia
+                    </small>
+                </h2>
+                <p>Test write</p>
+                <p><a href=""></a><a href=""></a></p>
+            </div>
         </div>
     </div>
-    <div class="thumbnail rightg-caption col-xs-5 col-md-5">
-        <div class="image">
-            <img class="img-responsive" src="http://colorvisiontesting.com/images/plate%20with%205.jpg" alt="" class="span2">
-        </div>
-        <div class="caption span2">
-            <h3>Test2</h3>
-            <p>Test write2</p>
-            <p><a href=""></a><a href=""></a></p>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="thumbnail rightg-caption col-xs-5 col-md-5">
-        <div class="image">
-            <img class="img-responsive" src="http://colorvisiontesting.com/images/plate%20with%205.jpg" alt="" class="span1">
-        </div>
-        <div class="caption span3">
-            <h3>Test</h3>
-            <p>Test write, to show that the thumbnail is not a bitch and gives me the right space</p>
-            <p><a href=""></a><a href=""></a></p>
-        </div>
-    </div>
-    <div class="thumbnail rightg-caption col-xs-5 col-md-5">
-        <div class="image">
-            <img class="img-responsive" src="http://colorvisiontesting.com/images/plate%20with%205.jpg" alt="" class="span2">
-        </div>
-        <div class="caption span2">
-            <h3>Test2</h3>
-            <p>Test write2</p>
-            <p><a href=""></a><a href=""></a></p>
-        </div>
-    </div>
-</div>
+}
