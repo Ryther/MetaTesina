@@ -1,0 +1,25 @@
+@model MetaTesina.Models.Article
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+    <div class="container">
+        <div class="row col-md-10 center-block" style="float: none">
+            <img src="@Model.ArticleMainImg.AssetPath" alt="" class="col-md-5 image">
+            <h1 class="col-md-5">
+                @Model.ArticleTitle
+                <small>
+                    <br>
+                    @Model.Category.CategoryName
+                </small>
+            </h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row col-md-10 center-block" style="float: none">
+            <p>
+                @Html.Raw(Model.ArticleContent)
+            </p>
+        </div>
+    </div>

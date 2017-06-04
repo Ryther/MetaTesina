@@ -9,6 +9,8 @@ using MetaTesina.Data;
 using MetaTesina.Models;
 using MetaTesina.Helpers;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using System.Net;
 
 namespace MetaTesina.Controllers
 {
@@ -28,13 +30,21 @@ namespace MetaTesina.Controllers
         {
             string userId = _userManager.GetUserId(HttpContext.User);
 
-            var applicationDbContext = _context.Article
-                                            .Include(a => a.ApplicationUser)
-                                            .Include(a => a.ArticleLinkImg)
-                                            .Include(a => a.ArticleMainImg)
-                                            .Include(a => a.Category)
-                                            .Where(a => a.ApplicationUserID == userId);
-            return View(await applicationDbContext.ToListAsync());
+            var articles = await _context.Article
+                            .Include(a => a.ApplicationUser)
+                            .Include(a => a.ArticleLinkImg)
+                            .Include(a => a.ArticleMainImg)
+                            .Include(a => a.Category)
+                            .Where(a => a.ApplicationUserID == userId)
+                            .ToListAsync();
+            
+            foreach (var article in articles)
+            {
+                article.ArticleDescription = Convert.ToString(article.ArticleDescription).Substring(0, 10);
+                article.ArticleContent = Convert.ToString(article.ArticleContent).Substring(0, 25);
+            }
+
+            return View(articles);
         }
 
         // GET: Article/Details/5
@@ -51,6 +61,31 @@ namespace MetaTesina.Controllers
                 .Include(a => a.ArticleMainImg)
                 .Include(a => a.Category)
                 .SingleOrDefaultAsync(m => m.ArticleID == id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            return View(article);
+        }
+
+        // GET: Article/Show/1
+        [AllowAnonymous]
+        public async Task<IActionResult> Show(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var article = await _context.Article
+                .Include(a => a.ApplicationUser)
+                .Include(a => a.ArticleMainImg)
+                .Include(a => a.Category)
+                .SingleOrDefaultAsync(m => m.ArticleID == id);
+
+            article.ArticleContent = WebUtility.HtmlDecode(article.ArticleContent);
+
             if (article == null)
             {
                 return NotFound();

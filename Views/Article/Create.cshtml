@@ -66,7 +66,8 @@
         <div class="form-group">
             <label asp-for="ArticleContent" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ArticleContent" class="form-control" />
+                <textarea asp-for="ArticleContent"></textarea>
+                <!--input asp-for="ArticleContent" class="form-control" /-->
                 <span asp-validation-for="ArticleContent" class="text-danger"></span>
             </div>
         </div>
@@ -82,3 +83,7 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts
+{
+  <script>tinymce.init({ selector:'textarea' });</script>
+}
