@@ -57,9 +57,9 @@ namespace MetaTesina.Models
         
         [Required]
         [Display(Name="Contenuto Articolo")]
-        [DataTypeAttribute(DataType.MultilineText)]
+        [UIHint("tinymce_full")]
         [MinLength(10)]
-        [MaxLength(10000)]
+        [MaxLength(1000000)]
         public string ArticleContent { get; set; }
     }
 }
