@@ -4,38 +4,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-@foreach (var item in Model)
-{
-    <div class="row col-md-10">
-        <div class="thumbnail rightg-caption col-xs-8 col-md-4">
-            <div class="image">
-                <img class="img-responsive" src="@item.ArticleLinkImg.AssetPath" alt="">
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="row col-md-10 center-block" style="float: none">
+                <div class="thumbnail right-caption col-md-10">
+                    <div class="image">
+                        <a asp-area="" asp-controller="Article" asp-action="Show" asp-route-id=@item.ArticleID >
+                            <img class="img-responsive" src="@item.ArticleLinkImg.AssetPath" alt="">
+                        </a>
+                    </div>
+                    <div class="caption">
+                        <h2>
+                            <a asp-area="" asp-controller="Article" asp-action="Show" asp-route-id=@item.ArticleID >
+                                @item.ArticleTitle
+                            </a>
+                            <br>
+                            <small>
+                                @item.Category.CategoryName
+                            </small>
+                        </h2>
+                        <p>@item.ArticleDescription</p>
+                        <p><a href=""></a><a href=""></a></p>
+                    </div>
+                </div>
             </div>
-            <div class="caption">
-                <h2>@item.ArticleTitle
-                    <br>
-                    <small>
-                        @item.Category.CategoryName
-                    </small>
-                </h2>
-                <p>Test write</p>
-                <p><a href=""></a><a href=""></a></p>
-            </div>
-        </div>
-        <div class="thumbnail rightg-caption col-xs-8 col-md-4">
-            <div class="image">
-                <img class="img-responsive" src="http://colorvisiontesting.com/images/plate%20with%205.jpg" alt="">
-            </div>
-            <div class="caption">
-                <h2>Test
-                    <br>
-                    <small>
-                        Storia
-                    </small>
-                </h2>
-                <p>Test write</p>
-                <p><a href=""></a><a href=""></a></p>
-            </div>
-        </div>
+        }
     </div>
-}
