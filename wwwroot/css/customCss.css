@@ -1,13 +1,21 @@
+.center-class {
+    display: block;
+}
+
 .thumbnail {
+    display: block;
+    height: 25%;
     margin: 10px;
 }
+
 .thumbnail.right-caption > img {
     float: left;
     margin-right: 9px;
 }
 
 .thumbnail.right-caption {
-    float: left;
+    display: flex;
+    align-content: center;
 }
 
 .thumbnail.right-caption > .caption {
@@ -15,7 +23,9 @@
 }
 
 .image {
-    display: table-cell;    
+    display: table-cell;
+    max-width: 25%;
+    max-height: 25%;
 }
 
 .caption {
