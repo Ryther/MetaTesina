@@ -8,7 +8,7 @@
         @foreach (var item in Model)
         {
             <div class="row col-md-10 center-block" style="float: none">
-                <div class="thumbnail right-caption col-md-10">
+                <div class="thumbnail right-caption col-md-10 shadow-main">
                     <div class="image">
                         <a asp-area="" asp-controller="Article" asp-action="Show" asp-route-id=@item.ArticleID >
                             <img class="img-responsive" src="@item.ArticleLinkImg.AssetPath" alt="">
