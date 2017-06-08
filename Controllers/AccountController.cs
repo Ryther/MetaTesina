@@ -12,12 +12,15 @@ using Microsoft.Extensions.Options;
 using MetaTesina.Models;
 using MetaTesina.Models.AccountViewModels;
 using MetaTesina.Services;
+using MetaTesina.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MetaTesina.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -447,6 +450,28 @@ namespace MetaTesina.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid code.");
                 return View(model);
             }
+        }
+
+        //
+        // GET /Account/Manage
+        [HttpGet]
+        [Authorize(Policy = "RequireModeratorRole")]
+        public async Task<IActionResult> Manage() {
+
+            if (HttpContext.User.IsInRole("Admin"))
+            {
+                ViewData["UserRole"] = "Admin";
+                List<ApplicationUser> users = await _userManager.Users
+                                                .Include(u => u.Roles)
+                                                .ToListAsync();            
+            }
+            else if (HttpContext.User.IsInRole("Moderator"))
+            {
+                ViewData["UserRole"] = "Moderator";
+            }
+            
+            ViewData["UserRole"] = false;
+            return View();
         }
 
         //
