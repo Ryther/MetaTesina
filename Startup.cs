@@ -126,12 +126,15 @@ namespace MetaTesina
 
             var powerUser = new ApplicationUser
             {
-                UserName = Configuration.GetSection("AppSettings")["UserName"],
-                Email = Configuration.GetSection("AppSettings")["UserEmail"]
+                UserName = Configuration.GetSection("UserSettings")["UserName"],
+                Email = Configuration.GetSection("UserSettings")["UserEmail"],
+                ApplicationUserFirstName = Configuration.GetSection("UserSettings")["UserFirstName"],
+                ApplicationUserLastName = Configuration.GetSection("UserSettings")["UserLastName"],
+                ApplicationUserNickname = Configuration.GetSection("UserSettings")["UserName"]
             };
-            string userPassword = Configuration.GetSection("AppSettings")["UserPAssword"];
+            string userPassword = Configuration.GetSection("UserSettings")["UserPassword"];
             
-            var _user = await UserManager.FindByEmailAsync(Configuration.GetSection("AppSettings")["UserEmail"]);
+            var _user = await UserManager.FindByEmailAsync(Configuration.GetSection("UserSettings")["UserEmail"]);
 
             if (_user == null)
             {
