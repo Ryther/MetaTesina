@@ -119,6 +119,7 @@ namespace MetaTesina.Controllers
                     ApplicationUserLastName = model.LastName,
                     ApplicationUserNickname = model.Nickname };
                 var result = await _userManager.CreateAsync(user, model.Password);
+                await _userManager.AddToRoleAsync(user, "User");
                 if (result.Succeeded)
                 {
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
