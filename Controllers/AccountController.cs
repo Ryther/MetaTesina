@@ -451,29 +451,7 @@ namespace MetaTesina.Controllers
                 return View(model);
             }
         }
-
-        //
-        // GET /Account/Manage
-        [HttpGet]
-        [Authorize(Policy = "RequireModeratorRole")]
-        public async Task<IActionResult> Manage() {
-
-            if (HttpContext.User.IsInRole("Admin"))
-            {
-                ViewData["UserRole"] = "Admin";
-                List<ApplicationUser> users = await _userManager.Users
-                                                .Include(u => u.Roles)
-                                                .ToListAsync();            
-            }
-            else if (HttpContext.User.IsInRole("Moderator"))
-            {
-                ViewData["UserRole"] = "Moderator";
-            }
-            
-            ViewData["UserRole"] = false;
-            return View();
-        }
-
+        
         //
         // GET /Account/AccessDenied
         [HttpGet]

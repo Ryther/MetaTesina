@@ -10,12 +10,16 @@ using Microsoft.Extensions.Options;
 using MetaTesina.Models;
 using MetaTesina.Models.ManageViewModels;
 using MetaTesina.Services;
+using Microsoft.EntityFrameworkCore;
+using MetaTesina.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MetaTesina.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly string _externalCookieScheme;
@@ -24,13 +28,15 @@ namespace MetaTesina.Controllers
         private readonly ILogger _logger;
 
         public ManageController(
-          UserManager<ApplicationUser> userManager,
-          SignInManager<ApplicationUser> signInManager,
-          IOptions<IdentityCookieOptions> identityCookieOptions,
-          IEmailSender emailSender,
-          ISmsSender smsSender,
-          ILoggerFactory loggerFactory)
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IOptions<IdentityCookieOptions> identityCookieOptions,
+            IEmailSender emailSender,
+            ISmsSender smsSender,
+            ILoggerFactory loggerFactory)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
@@ -339,6 +345,39 @@ namespace MetaTesina.Controllers
                 await HttpContext.Authentication.SignOutAsync(_externalCookieScheme);
             }
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
+        }
+
+        //
+        // GET /Manage/SetRoles
+        [HttpGet]
+        [Authorize(Policy = "RequireModeratorRole")]
+        public async Task<IActionResult> SetRoles(SetRolesViewModel model) {
+
+            if (HttpContext.User.IsInRole("Admin"))
+            {
+                
+                var userList = await SetRolesViewModel.GetRolesViewModel(_userManager);
+                var rolesList = await _context.UserRoles.ToListAsync();
+                
+                ViewData["UserRole"] = "Admin";
+                ViewData["Users"] = new SelectList(userList, "Id", "UserName");
+                ViewData["UsersRoles"] = new SelectList(userList, "Id", "RoleName");
+                ViewData["Roles"] = new SelectList
+                return View();
+            }
+            else if (HttpContext.User.IsInRole("Moderator"))
+            {
+                var excludedRoles = new string[] {"Admin", "Moderator"};
+                var userList = await SetRolesViewModel.GetRolesViewModel(_userManager, excludedRoles);
+
+                ViewData["UserRole"] = "Admin";
+                ViewData["Users"] = new SelectList(userList, "Id", "UserName");
+                ViewData["UsersRoles"] = new SelectList(userList, "Id", "RoleName");
+                ViewData["Roles"] = 
+                return  View();
+            }
+            
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
 
         #region Helpers
