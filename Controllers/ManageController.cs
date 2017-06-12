@@ -13,6 +13,8 @@ using MetaTesina.Services;
 using Microsoft.EntityFrameworkCore;
 using MetaTesina.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using MetaTesina.Helpers;
 
 namespace MetaTesina.Controllers
 {
@@ -348,36 +350,21 @@ namespace MetaTesina.Controllers
         }
 
         //
-        // GET /Manage/SetRoles
-        [HttpGet]
+        // GET /Manage/Users
         [Authorize(Policy = "RequireModeratorRole")]
-        public async Task<IActionResult> SetRoles(SetRolesViewModel model) {
+        public async Task<IActionResult> Users(SetRolesViewModel model) {
 
-            if (HttpContext.User.IsInRole("Admin"))
-            {
-                
-                var userList = await SetRolesViewModel.GetRolesViewModel(_userManager);
-                var rolesList = await _context.UserRoles.ToListAsync();
-                
-                ViewData["UserRole"] = "Admin";
-                ViewData["Users"] = new SelectList(userList, "Id", "UserName");
-                ViewData["UsersRoles"] = new SelectList(userList, "Id", "RoleName");
-                ViewData["Roles"] = new SelectList
-                return View();
-            }
-            else if (HttpContext.User.IsInRole("Moderator"))
-            {
-                var excludedRoles = new string[] {"Admin", "Moderator"};
-                var userList = await SetRolesViewModel.GetRolesViewModel(_userManager, excludedRoles);
+            var roleName = await UserHelper.GetUserRoleName(HttpContext, _userManager);
+            int roleLevel = UserHelper.GetUserLevel(roleName);
 
-                ViewData["UserRole"] = "Admin";
-                ViewData["Users"] = new SelectList(userList, "Id", "UserName");
-                ViewData["UsersRoles"] = new SelectList(userList, "Id", "RoleName");
-                ViewData["Roles"] = 
-                return  View();
-            }
+            List<string> roles = UserHelper.GetRolesIdByMaxLevel(roleLevel, _context);   
             
-            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+            var users = await _userManager.Users
+                        .Include(u => u.Roles)
+                        .Where(u => roles.Contains(u.Roles.FirstOrDefault().RoleId))
+                        .ToListAsync();
+            
+            return  View(users);
         }
 
         #region Helpers
