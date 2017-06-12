@@ -26,6 +26,7 @@ namespace MetaTesina.Controllers
         }
 
         // GET: Article
+        [Authorize(Policy="RequireWriterRole")]
         public async Task<IActionResult> Index()
         {
             string userId = _userManager.GetUserId(HttpContext.User);
@@ -97,9 +98,8 @@ namespace MetaTesina.Controllers
         // GET: Article/Create
         public async Task<IActionResult> Create()
         {
-            UserHelper userHelper = new UserHelper(_userManager, HttpContext);
-            string userId = userHelper.GetUserId().Result;
-            string userFirstName = userHelper.GetUserFirstNameAsync().Result;
+            string userId = await UserHelper.GetUserId(HttpContext, _userManager);
+            string userFirstName = await UserHelper.GetUserFirstNameAsync(HttpContext, _userManager);
             
             List<ApplicationUser> user = await _context.Users
                             .Where(u => u.Id == userId)
@@ -126,9 +126,8 @@ namespace MetaTesina.Controllers
                 return RedirectToAction("Index");
             }
             
-            UserHelper userHelper = new UserHelper(_userManager, HttpContext);
-            string userId = userHelper.GetUserId().Result;
-            string userFirstName = userHelper.GetUserFirstNameAsync().Result;
+            string userId = await UserHelper.GetUserId(HttpContext, _userManager);
+            string userFirstName = await UserHelper.GetUserFirstNameAsync(HttpContext, _userManager);
             
             List<ApplicationUser> user = await _context.Users
                             .Where(u => u.Id == userId)
