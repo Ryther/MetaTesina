@@ -15,6 +15,7 @@ using MetaTesina.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Identity;
+using MetaTesina.Helpers;
 
 namespace MetaTesina
 {
@@ -61,9 +62,10 @@ namespace MetaTesina
             //Add roles policies
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-                options.AddPolicy("RequireModeratorRole", policy => policy.RequireRole(new string[] {"Admin", "Moderator"}));
-                options.AddPolicy("RequireWriterRole", policy => policy.RequireRole(new string[] {"Admin", "Moderator", "Writer"}));
+                options.AddPolicy("RequireSuperAdminRole", policy => policy.RequireRole("SuperAdmin"));
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("SuperAdmin", "Admin"));
+                options.AddPolicy("RequireModeratorRole", policy => policy.RequireRole(new string[] {"SuperAdmin", "Admin", "Moderator"}));
+                options.AddPolicy("RequireWriterRole", policy => policy.RequireRole(new string[] {"SuperAdmin", "Admin", "Moderator", "Writer"}));
             });
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -111,7 +113,7 @@ namespace MetaTesina
         {
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            string[] roleNames = {"Admin", "Moderator", "Writer", "User"};
+            List<string> roleNames = UserHelper.GetRolesByMinLevel(0);
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
@@ -141,7 +143,7 @@ namespace MetaTesina
                 var createPowerUser = await UserManager.CreateAsync(powerUser, userPassword);
                 if (createPowerUser.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(powerUser, "Admin");
+                    await UserManager.AddToRoleAsync(powerUser, "SuperAdmin");
                 }
             }
         }
